@@ -22,6 +22,17 @@ const userController = (business: any) => ({
         res.status(500).send(err);
       });
   },
+
+  validate(req: Request, res: Response) {
+    return business
+      .validate(req.params)
+      .then((authUser: any) => {
+        res.status(201).send(authUser);
+      })
+      .catch((err: any) => {
+        res.status(500).send(err);
+      });
+  },
 });
 
 export default userController;

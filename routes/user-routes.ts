@@ -5,6 +5,8 @@ const userRoute = (express: any, controller: any) => {
 
   router.post("/signup", controller.signUp);
 
+  router.put("/validate/:token", controller.validate);
+
   return router;
 };
 
