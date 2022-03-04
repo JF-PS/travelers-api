@@ -91,6 +91,122 @@
                     }
                 }
             }
+        },
+        "/users/validate/{token}": {
+            "put": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Validate a account",
+                "description": "",
+                "operationId": "validateAccount",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "token used to confirm an user's account",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/users/forgotPassword": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Enter email to modify password",
+                "description": "",
+                "operationId": "forgotPassword",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Email",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/email"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/users/newPassword/{token}": {
+            "put": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Modify a password",
+                "description": "",
+                "operationId": "modifyPassword",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "token used to modify a password",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "new Password",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/password"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -123,6 +239,28 @@
             },
             "xml": {
                 "name": "signIn"
+            }
+        },
+        "email": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "email"
+            }
+        },
+        "password": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "password"
             }
         }
     }
