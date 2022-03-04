@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
-const userController = (business: any) => ({
+const userController = (service: any) => ({
   signIn(req: Request, res: Response) {
-    return business
+    return service
       .signIn(req.body)
       .then((authUser: void) => {
         res.status(201).send(authUser);
@@ -13,7 +13,7 @@ const userController = (business: any) => ({
   },
 
   signUp(req: Request, res: Response) {
-    return business
+    return service
       .signUp(req.body)
       .then((authUser: any) => {
         res.status(201).send(authUser);
@@ -24,8 +24,9 @@ const userController = (business: any) => ({
   },
 
   validate(req: Request, res: Response) {
-    return business
-      .validate(req.params)
+    const { token } = req.params;
+    return service
+      .validate(token)
       .then((authUser: any) => {
         res.status(201).send(authUser);
       })

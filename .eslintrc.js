@@ -9,6 +9,7 @@ module.exports = {
   parserOptions: { project: ["./tsconfig.json"] },
   plugins: ["@typescript-eslint"],
   rules: {
+    "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/no-explicit-any": ["off"],
     "@typescript-eslint/strict-boolean-expressions": 0,
   },

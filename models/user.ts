@@ -1,24 +1,14 @@
 "use strict";
-import { Model, UUIDV4 } from "sequelize";
-
-interface UserAttributes {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-}
+import { Model } from "sequelize";
+import IUser from "../interfaces/i-user";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class User extends Model<UserAttributes> implements UserAttributes {
+  class User extends Model<IUser> implements IUser {
     id!: number;
     name!: string;
     email!: string;
     password!: string;
-    static associate(models: any) {
-      User.belongsToMany(models.Project, {
-        through: "ProjectAssignments",
-      });
-    }
+    validation!: boolean;
   }
   User.init(
     {
@@ -29,7 +19,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         autoIncrement: true,
       },
       name: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       email: {
@@ -40,6 +30,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      validation: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
     },
     {
