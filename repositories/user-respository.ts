@@ -1,5 +1,6 @@
 import User from "../models";
 import IUser from "../interfaces/i-user";
+
 const Users = User.User;
 
 const attributes: Array<string> = [
@@ -69,6 +70,12 @@ class UserRepository {
         });
     });
   }
+
+  /*   createNewPassword(email: string, password: string) {
+   */ //recupérer l'user correspondant au mail
+  //mettre à jour le password de cet user
+  /*   };
+   */
 }
 
 export default UserRepository;

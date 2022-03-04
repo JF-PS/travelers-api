@@ -71,6 +71,33 @@ const userService = (repository: any) => ({
 
     return { result: confirmAccount };
   },
+
+  async forgotPassword(user: any) {
+    //je veux récupérer le compte du user via l'email
+    const { email } = user;
+    const oldUser: IUser = await repository.getByEmail(email);
+
+    if (!oldUser) return { errorMessage: "User doesn't exist" };
+
+    const verifyToken = encrypt(email);
+
+    //j'envoie le mail pour changer de mdp
+    const text = `Your forgot your email!
+    Click on this link to reset it : /newPassword/${verifyToken}`;
+
+    sendEmail(writeEmail({ to: email, text }));
+
+    return { message: "Email sent" };
+  },
+
+  /*   async newPassword(tokenEmail: string, password: string) {
+   */ //décrypter le token email
+  //modification du mdp à l'utilisateur correspondant à l'email décrypté (cf 3 actions ci-dessous):
+  //vérifier si un utilisateur avec cet email existe
+  //s'il n'existe pas envoi d'un message d'erreur token Invalide
+  //si oui, on continue, appel de la fonction de modifcation password(email, password) - ( dans le repo)
+  /*   },
+   */
 });
 
 export default userService;

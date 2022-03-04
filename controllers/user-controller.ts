@@ -34,6 +34,40 @@ const userController = (service: any) => ({
         res.status(500).send(err);
       });
   },
+
+  forgotPassword(req: Request, res: Response) {
+    return service
+      .forgotPassword(req.body)
+      .then((authUser: void) => {
+        res.status(201).send(authUser);
+      })
+      .catch((err: any) => {
+        res.status(500).send(err);
+      });
+  },
+
+  newPassword(req: Request, res: Response) {
+    const { tokenPassword } = req.params;
+    return service
+      .newPassword(tokenPassword)
+      .then((authUser: any) => {
+        res.status(201).send(authUser);
+      })
+      .catch((err: any) => {
+        res.status(500).send(err);
+      });
+  },
+
+  createNewPassword(req: Request, res: Response) {
+    return service
+      .createNewPassword(req.body)
+      .then((authUser: any) => {
+        res.status(201).send(authUser);
+      })
+      .catch((err: any) => {
+        res.status(500).send(err);
+      });
+  },
 });
 
 export default userController;

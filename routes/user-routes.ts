@@ -7,6 +7,10 @@ const userRoute = (express: any, controller: any) => {
 
   router.put("/validate/:token", controller.validate);
 
+  router.post("/forgotPassword", controller.forgotPassword); //Je rentre mon email, je valide, le mail s'envoie
+
+  router.put("/newPassword/:token", controller.newPassword); //Après avoir cliqué sur le lien du mail je me recréee un mdp via un formulaire
+
   return router;
 };
 
