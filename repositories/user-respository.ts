@@ -28,11 +28,12 @@ class UserRepository {
     });
   }
 
-  checkAccount(id: number, email: string): Promise<IUser> {
+  checkAccount(email: string, id: number = 0): Promise<IUser> {
+    const whereParams = id === 0 ? { email } : { id, email };
     return new Promise((resolve, reject) => {
       Users.findOne({
         attributes,
-        where: { id, email },
+        where: whereParams,
       })
         .then((user: IUser) => {
           resolve(user);
@@ -71,11 +72,23 @@ class UserRepository {
     });
   }
 
-  /*   createNewPassword(email: string, password: string) {
-   */ //recupérer l'user correspondant au mail
-  //mettre à jour le password de cet user
-  /*   };
-   */
+  createNewPassword(email: string, password: string): Promise<IUser> {
+    //recupérer l'user correspondant au mail
+    return new Promise((resolve, reject) => {
+      Users.findOne({
+        attributes,
+        where: { email },
+      })
+        //mettre à jour le password de cet user
+        .then((userPassword: any) => {
+          resolve(userPassword.update({ password }));
+        })
+        .catch((err: any) => {
+          console.error(err);
+          reject(err);
+        });
+    });
+  }
 }
 
 export default UserRepository;

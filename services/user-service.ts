@@ -90,14 +90,25 @@ const userService = (repository: any) => ({
     return { message: "Email sent" };
   },
 
-  /*   async newPassword(tokenEmail: string, password: string) {
-   */ //décrypter le token email
-  //modification du mdp à l'utilisateur correspondant à l'email décrypté (cf 3 actions ci-dessous):
-  //vérifier si un utilisateur avec cet email existe
-  //s'il n'existe pas envoi d'un message d'erreur token Invalide
-  //si oui, on continue, appel de la fonction de modifcation password(email, password) - ( dans le repo)
-  /*   },
-   */
+  async newPassword(tokenEmail: string, password: string) {
+    //décrypter le token email
+    const decryptToken = decrypt(tokenEmail);
+
+    //modification du mdp à l'utilisateur correspondant à l'email décrypté (cf 3 actions ci-dessous):
+
+    //vérifier si un utilisateur avec cet email existe
+    const isAccountExist: IUser = await repository.checkAccount(decryptToken);
+
+    //s'il n'existe pas envoi d'un message d'erreur token Invalide
+    if (!isAccountExist) return { errorMessage: "Your account doesn't exist!" };
+
+    //si oui, on continue, appel de la fonction de modifcation password(email, password) - ( dans le repo)
+    const confirmNewPassword: IUser = await repository.createNewPassword(
+      password
+    );
+
+    return { result: confirmNewPassword };
+  },
 });
 
 export default userService;
