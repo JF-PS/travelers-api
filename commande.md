@@ -1,5 +1,5 @@
 npx sequelize-cli model:generate --name User --attributes name:string,email:string,password:string,validation:boolean
-npx sequelize-cli model:generate --name Vehicles --attributes category_id:integer,sub_category_id:integer,brand_id:integer,model_id:integer,gas_id:integer,horsepower_id:integer,year:date,date_circulation:date,kilometers:float
+npx sequelize-cli model:generate --name Vehicles --attributes category_id:integer,sub_category_id:integer,brand_id:integer,serial_numbers_id:integer,gas_id:integer,horsepower_id:integer,year:date,date_circulation:date,kilometers:float
 npx sequelize-cli model:generate --name Categories --attributes name:string
 npx sequelize-cli model:generate --name Sub_categories --attributes name:string
 npx sequelize-cli model:generate --name Gas --attributes name:string
