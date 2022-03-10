@@ -1,12 +1,20 @@
 "use strict";
 import { Model } from "sequelize";
+import IAdType from "../interfaces/i-ad-type";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Type_ads extends Model {
+  class Ad_type extends Model<IAdType> implements IAdType {
     id!: number;
     name!: string;
+
+    static associate(models: any) {
+      Ad_type.hasMany(models.Ad, {
+        foreignKey: "type_id",
+        as: "ad",
+      });
+    }
   }
-  Type_ads.init(
+  Ad_type.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -18,8 +26,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      modelName: "Type_ads",
+      modelName: "Ad_type",
     }
   );
-  return Type_ads;
+  return Ad_type;
 };

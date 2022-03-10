@@ -19,6 +19,12 @@ import vehicleController from "./controllers/vehicle-controller";
 import vehicleRoutes from "./routes/vehicle-routes";
 const vehicleRepository = new VehicleRepository();
 
+import AdRepository from "./repositories/ad-repository";
+import adService from "./services/ad-service";
+import adController from "./controllers/ad-controller";
+import adRoutes from "./routes/ad-routes";
+const adRepository = new AdRepository();
+
 const app = express();
 
 app.use(logger("dev"));
@@ -38,6 +44,8 @@ app.use(
   "/vehicles",
   vehicleRoutes(express, vehicleController(vehicleService(vehicleRepository)))
 );
+
+app.use("/ads", adRoutes(express, adController(adService(adRepository))));
 
 const port = process.env.PORT || 3000;
 
