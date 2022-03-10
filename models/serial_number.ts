@@ -1,20 +1,20 @@
 "use strict";
 import { Model } from "sequelize";
-import IBrand from "../interfaces/i-brand";
+import ISerial_number from "../interfaces/i-serial_number";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Brand extends Model<IBrand> implements IBrand {
+  class Serial_number extends Model<ISerial_number> implements ISerial_number {
     id!: number;
     name!: string;
 
     static associate(models: any) {
-      Brand.hasMany(models.Vehicle, {
-        foreignKey: "brand_id",
+      Serial_number.hasMany(models.Vehicle, {
+        foreignKey: "serial_numbers_id",
         as: "vehicle",
       });
     }
   }
-  Brand.init(
+  Serial_number.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -26,8 +26,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      modelName: "Brand",
+      modelName: "Serial_number",
     }
   );
-  return Brand;
+  return Serial_number;
 };

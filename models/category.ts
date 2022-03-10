@@ -2,11 +2,11 @@
 import { Model } from "sequelize";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Categories extends Model {
+  class Category extends Model {
     id!: number;
     name!: string;
   }
-  Categories.init(
+  Category.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -18,8 +18,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      modelName: "Categories",
+      modelName: "Category",
     }
   );
-  return Categories;
+  return Category;
 };

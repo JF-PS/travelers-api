@@ -1,8 +1,8 @@
-import Vehicles from "../models";
+import Vehicle from "../models";
 import Gas from "../models";
-import IVehicles from "../interfaces/i-vehicles";
+import IVehicle from "../interfaces/i-vehicle";
 
-const Vehicle = Vehicles.Vehicles;
+const Vehicles = Vehicle.Vehicle;
 const Gass = Gas.Gas;
 
 const attributesVehicles: Array<string> = [
@@ -21,9 +21,9 @@ const attributesVehicles: Array<string> = [
 const attributesGas: Array<string> = ["id", "name"];
 
 class VehicleRepository {
-  getAll(): Promise<IVehicles> {
+  getAll(): Promise<IVehicle> {
     return new Promise((resolve, reject) => {
-      Vehicle.findAll({
+      Vehicles.findAll({
         attributes: attributesVehicles,
         include: [
           {
@@ -33,7 +33,7 @@ class VehicleRepository {
           },
         ],
       })
-        .then((vehicles: IVehicles) => {
+        .then((vehicles: IVehicle) => {
           console.log(vehicles);
           resolve(vehicles);
         })
