@@ -63,7 +63,7 @@ const userService = (repository: any) => ({
     const id = decryptToken.split("-")[0];
     const email = decryptToken.split("-")[1];
 
-    const isAccount: IUser = await repository.checkAccount(id, email);
+    const isAccount: IUser = await repository.checkAccount(email, id);
     if (!isAccount)
       return { errorMessage: "Your identify key is not available !" };
 
@@ -72,9 +72,8 @@ const userService = (repository: any) => ({
     return { result: confirmAccount };
   },
 
-  async forgotPassword(user: any) {
+  async forgotPassword(email: string) {
     //je veux récupérer le compte du user via l'email
-    const { email } = user;
     const oldUser: IUser = await repository.getByEmail(email);
 
     if (!oldUser) return { errorMessage: "User doesn't exist" };
@@ -82,7 +81,7 @@ const userService = (repository: any) => ({
     const verifyToken = encrypt(email);
 
     //j'envoie le mail pour changer de mdp
-    const text = `Your forgot your email!
+    const text = `Your forgot your password!
     Click on this link to reset it : /newPassword/${verifyToken}`;
 
     sendEmail(writeEmail({ to: email, text }));
@@ -98,12 +97,12 @@ const userService = (repository: any) => ({
 
     //vérifier si un utilisateur avec cet email existe
     const isAccountExist: IUser = await repository.checkAccount(decryptToken);
-
     //s'il n'existe pas envoi d'un message d'erreur token Invalide
     if (!isAccountExist) return { errorMessage: "Your account doesn't exist!" };
 
     //si oui, on continue, appel de la fonction de modifcation password(email, password) - ( dans le repo)
     const confirmNewPassword: IUser = await repository.createNewPassword(
+      decryptToken,
       password
     );
 

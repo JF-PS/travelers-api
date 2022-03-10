@@ -36,8 +36,9 @@ const userController = (service: any) => ({
   },
 
   forgotPassword(req: Request, res: Response) {
+    const { email } = req.body;
     return service
-      .forgotPassword(req.body)
+      .forgotPassword(email)
       .then((authUser: void) => {
         res.status(201).send(authUser);
       })
@@ -47,9 +48,10 @@ const userController = (service: any) => ({
   },
 
   newPassword(req: Request, res: Response) {
-    const { tokenPassword } = req.params;
+    const { password } = req.body;
+    const { token } = req.params;
     return service
-      .newPassword(tokenPassword)
+      .newPassword(token, password)
       .then((authUser: any) => {
         res.status(201).send(authUser);
       })
