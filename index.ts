@@ -4,6 +4,9 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import path from "path";
 
+import swaggerUi from "swagger-ui-express";
+import * as swaggerDocument from "./swagger.json";
+
 import UserRepository from "./repositories/user-respository";
 import userService from "./services/user-service";
 import userController from "./controllers/user-controller";
@@ -17,6 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(
   "/users",
