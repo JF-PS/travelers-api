@@ -1,20 +1,20 @@
 "use strict";
 import { Model } from "sequelize";
-import ISerial_number from "../interfaces/i-serial_number";
+import ISerialNumber from "../interfaces/i-serial_number";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Serial_number extends Model<ISerial_number> implements ISerial_number {
+  class SerialNumber extends Model<ISerialNumber> implements ISerialNumber {
     id!: number;
     name!: string;
 
     static associate(models: any) {
-      Serial_number.hasMany(models.Vehicle, {
+      SerialNumber.hasMany(models.Vehicle, {
         foreignKey: "serial_numbers_id",
         as: "vehicle",
       });
     }
   }
-  Serial_number.init(
+  SerialNumber.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -26,8 +26,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      modelName: "Serial_number",
+      modelName: "SerialNumber",
     }
   );
-  return Serial_number;
+  return SerialNumber;
 };

@@ -23,14 +23,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
         as: "vehicle",
       });
 
-      Ad.belongsTo(models.Ad_type, {
+      Ad.belongsTo(models.AdType, {
         foreignKey: "type_id",
         as: "type",
       });
 
-      Ad.hasMany(models.Ad_pictures, {
+      Ad.hasMany(models.AdPictures, {
         foreignKey: "Ad_pictures_id",
-        as: "Ad_pictures",
+        as: "AdPictures",
       });
     }
   }

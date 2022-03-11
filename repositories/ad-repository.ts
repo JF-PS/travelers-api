@@ -1,24 +1,22 @@
 import Ad from "../models";
 import IAd from "../interfaces/i-ad";
-import AdType from "../models";
+import Ad_type from "../models";
 import Vehicle from "../models";
 import Horsepower from "../models";
 
 const Ads = Ad.Ad;
-const AdsTypes = AdType.AdType;
+const AdsTypes = Ad_type.Ad_type;
 const Vehicles = Vehicle.Vehicle;
 const Horsepowers = Horsepower.Horsepower;
 
-const attributesAd: Array<string> = [
-  "id",
-  "vehicle_id",
-  "user_id",
-  "type_id",
-  "address",
-  "price",
-];
+const attributesAd: Array<string> = ["id", "user_id", "address", "price"];
 
 const attributesAdType: Array<string> = ["id", "name"];
+const attributesVehicle: Array<string> = [
+  "id",
+  "kilometers",
+  "date_circulation",
+];
 
 class AdRepository {
   getAll(): Promise<IAd> {
@@ -34,6 +32,7 @@ class AdRepository {
           {
             model: Vehicles,
             as: "vehicle",
+            attributes: attributesVehicle,
             include: [
               {
                 model: Horsepowers,

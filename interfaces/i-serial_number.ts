@@ -1,5 +1,5 @@
-interface ISerial_number {
+interface ISerialNumber {
   id: number;
   name: string;
 }
-export default ISerial_number;
+export default ISerialNumber;

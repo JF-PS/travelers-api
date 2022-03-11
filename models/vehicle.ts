@@ -16,14 +16,19 @@ module.exports = (sequelize: any, DataTypes: any) => {
     kilometers!: number;
 
     static associate(models: any) {
+      Vehicle.hasOne(models.Ad, {
+        foreignKey: "ad_id",
+        as: "ad",
+      });
+
       Vehicle.belongsTo(models.Gas, {
         foreignKey: "gas_id",
         as: "gas",
       });
 
-      Vehicle.belongsTo(models.Serial_number, {
+      Vehicle.belongsTo(models.SerialNumber, {
         foreignKey: "serial_number_id",
-        as: "serial_number",
+        as: "serialNumber",
       });
 
       Vehicle.belongsTo(models.Horsepower, {
@@ -36,9 +41,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
         as: "category",
       });
 
-      Vehicle.belongsTo(models.Sub_category, {
+      Vehicle.belongsTo(models.SubCategory, {
         foreignKey: "sub_category_id",
-        as: "sub_category",
+        as: "subCategory",
       });
 
       Vehicle.belongsTo(models.Brand, {

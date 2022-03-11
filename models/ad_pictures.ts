@@ -3,19 +3,19 @@ import { Model } from "sequelize";
 import IAdPictures from "../interfaces/i-ad-pictures";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Ad_pictures extends Model<IAdPictures> implements IAdPictures {
+  class AdPictures extends Model<IAdPictures> implements IAdPictures {
     id!: number;
     ad_id!: number;
     source!: string;
 
     static associate(models: any) {
-      Ad_pictures.belongsTo(models.Ad, {
+      AdPictures.belongsTo(models.Ad, {
         foreignKey: "ad_id",
         as: "ad",
       });
     }
   }
-  Ad_pictures.init(
+  AdPictures.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -28,8 +28,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      modelName: "Ad_pictures",
+      modelName: "AdPictures",
     }
   );
-  return Ad_pictures;
+  return AdPictures;
 };

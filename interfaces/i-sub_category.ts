@@ -1,5 +1,5 @@
-interface ISub_category {
+interface ISubCategory {
   id: number;
   name: string;
 }
-export default ISub_category;
+export default ISubCategory;

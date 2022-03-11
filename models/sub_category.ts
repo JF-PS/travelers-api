@@ -1,20 +1,20 @@
 "use strict";
 import { Model } from "sequelize";
-import ISub_category from "../interfaces/i-sub_category";
+import ISubCategory from "../interfaces/i-sub_category";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Sub_category extends Model<ISub_category> implements ISub_category {
+  class SubCategory extends Model<ISubCategory> implements ISubCategory {
     id!: number;
     name!: string;
 
     static associate(models: any) {
-      Sub_category.hasMany(models.Vehicle, {
+      SubCategory.hasMany(models.Vehicle, {
         foreignKey: "sub_category_id",
         as: "vehicle",
       });
     }
   }
-  Sub_category.init(
+  SubCategory.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -26,8 +26,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      modelName: "Sub_category",
+      modelName: "SubCategory",
     }
   );
-  return Sub_category;
+  return SubCategory;
 };
