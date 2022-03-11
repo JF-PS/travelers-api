@@ -19,9 +19,12 @@ const attributesVehicle: Array<string> = [
 ];
 
 class AdRepository {
-  getAll(): Promise<IAd> {
+  getAll(limit: number, offset: number): Promise<IAd> {
     return new Promise((resolve, reject) => {
-      Ads.findAll({
+      Ads.findAndCountAll({
+        limit,
+        offset,
+        // where (pour les différents filtres)
         attributes: attributesAd,
         include: [
           {
