@@ -2,9 +2,12 @@ import Ad from "../models";
 import IAd from "../interfaces/i-ad";
 import AdType from "../models";
 import Vehicle from "../models";
+import Horsepower from "../models";
 
 const Ads = Ad.Ad;
+const AdsTypes = AdType.AdType;
 const Vehicles = Vehicle.Vehicle;
+const Horsepowers = Horsepower.Horsepower;
 
 const attributesAd: Array<string> = [
   "id",
@@ -24,13 +27,19 @@ class AdRepository {
         attributes: attributesAd,
         include: [
           {
-            model: AdType,
+            model: AdsTypes,
             as: "type",
             attributes: attributesAdType,
           },
           {
             model: Vehicles,
             as: "vehicle",
+            include: [
+              {
+                model: Horsepowers,
+                as: "horsepower",
+              },
+            ],
           },
         ],
       })

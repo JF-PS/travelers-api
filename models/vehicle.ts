@@ -26,6 +26,16 @@ module.exports = (sequelize: any, DataTypes: any) => {
         as: "serial_number",
       });
 
+      Vehicle.belongsTo(models.Horsepower, {
+        foreignKey: "horsepower_id",
+        as: "horsepower",
+      });
+
+      Vehicle.belongsTo(models.Category, {
+        foreignKey: "category_id",
+        as: "category",
+      });
+
       Vehicle.belongsTo(models.Sub_category, {
         foreignKey: "sub_category_id",
         as: "sub_category",

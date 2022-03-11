@@ -1,20 +1,20 @@
 "use strict";
 import { Model } from "sequelize";
-import ICategory from "../interfaces/i-category";
+import IHorsepower from "../interfaces/i-horsepower";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Category extends Model<ICategory> implements ICategory {
+  class Horsepower extends Model<IHorsepower> implements IHorsepower {
     id!: number;
     name!: string;
 
     static associate(models: any) {
-      Category.hasMany(models.Vehicle, {
-        foreignKey: "category_id",
+      Horsepower.hasMany(models.Vehicle, {
+        foreignKey: "horsepower_id",
         as: "vehicle",
       });
     }
   }
-  Category.init(
+  Horsepower.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -26,8 +26,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      modelName: "Category",
+      modelName: "Horsepower",
     }
   );
-  return Category;
+  return Horsepower;
 };

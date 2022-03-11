@@ -9,7 +9,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     source!: string;
 
     static associate(models: any) {
-      Ad_pictures.hasOne(models.Ad, {
+      Ad_pictures.belongsTo(models.Ad, {
         foreignKey: "ad_id",
         as: "ad",
       });
