@@ -11,6 +11,14 @@
         {
             "name": "user",
             "description": "Operations about users"
+        },
+        {
+            "name": "vehicle",
+            "description": "Operations about vehicles"
+        },
+        {
+            "name": "ad",
+            "description": "Operations about ads"
         }
     ],
     "schemes": [
@@ -49,7 +57,7 @@
                     "201": {
                         "description": "Successful operation"
                     },
-                    "405": {
+                    "400": {
                         "description": "Invalid input"
                     }
                 }
@@ -86,7 +94,7 @@
                     "201": {
                         "description": "Successful operation"
                     },
-                    "405": {
+                    "400": {
                         "description": "Invalid input"
                     }
                 }
@@ -118,10 +126,10 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Successful operation"
                     },
-                    "405": {
+                    "400": {
                         "description": "Invalid input"
                     }
                 }
@@ -158,7 +166,7 @@
                     "201": {
                         "description": "Successful operation"
                     },
-                    "405": {
+                    "400": {
                         "description": "Invalid input"
                     }
                 }
@@ -199,10 +207,99 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Successful operation"
                     },
-                    "405": {
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+
+        "/vehicles": {
+            "get": {
+                "tags": [
+                    "vehicle"
+                ],
+                "summary": "Get all the vehicles",
+                "description": "",
+                "operationId": "getAllVehicles",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+
+        "/ads": {
+            "get": {
+                "tags": [
+                    "ad"
+                ],
+                "summary": "Get all the ads",
+                "description": "",
+                "operationId": "getAllAds",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/ads/{id}": {
+            "get": {
+                "tags": [
+                    "ad"
+                ],
+                "summary": "Get one unique ad",
+                "description": "",
+                "operationId": "getByIdAd",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                 "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id used to get an unique ad",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
                         "description": "Invalid input"
                     }
                 }

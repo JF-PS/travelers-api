@@ -10,7 +10,7 @@ const attributesVehicles: Array<string> = [
   "category_id",
   "sub_category_id",
   "brand_id",
-  "serial_numbers_id",
+  "serial_number_id",
   "gas_id",
   "horsepower_id",
   "year",
