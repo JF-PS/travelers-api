@@ -8,7 +8,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     vehicle_id!: number;
     user_id!: number;
     type_id!: number;
-    //ad_pictures_id!: number;
     address!: string;
     price!: number;
 
@@ -29,7 +28,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       });
 
       Ad.hasMany(models.AdPictures, {
-        foreignKey: "Ad_pictures_id",
+        foreignKey: "ad_id",
         as: "AdPictures",
       });
     }

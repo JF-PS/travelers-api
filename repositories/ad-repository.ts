@@ -1,11 +1,11 @@
 import Ad from "../models";
 import IAd from "../interfaces/i-ad";
-import Ad_type from "../models";
+import AdType from "../models";
 import Vehicle from "../models";
 import Horsepower from "../models";
 
 const Ads = Ad.Ad;
-const AdsTypes = Ad_type.Ad_type;
+const AdsTypes = AdType.AdType;
 const Vehicles = Vehicle.Vehicle;
 const Horsepowers = Horsepower.Horsepower;
 

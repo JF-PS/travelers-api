@@ -17,7 +17,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
     static associate(models: any) {
       Vehicle.hasOne(models.Ad, {
-        foreignKey: "ad_id",
+        foreignKey: "vehicle_id",
         as: "ad",
       });
 

@@ -5,7 +5,7 @@ const adController = (service: any) => ({
     return service
       .getAll()
       .then((ad: any) => {
-        res.status(201).send(ad);
+        res.status(200).send(ad);
       })
       .catch((err: any) => {
         res.status(500).send(err);
