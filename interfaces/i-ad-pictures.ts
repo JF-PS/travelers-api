@@ -1,5 +1,6 @@
 interface IAdPictures {
   id: number;
-  name: string;
+  ad_id: number;
+  source: string;
 }
 export default IAdPictures;
