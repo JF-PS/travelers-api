@@ -244,7 +244,7 @@
             }
         },
 
-        "/ads": {
+        "/ads/{limit}/{offset}": {
             "get": {
                 "tags": [
                     "ad"
@@ -259,6 +259,22 @@
                 "produces": [
                     "application/xml",
                     "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "path",
+                        "description": "limit the numbers of ads",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "path",
+                        "description": "allow to skip some ads to display",
+                        "required": true,
+                        "type": "integer"
+                    }
                 ],
                 "responses": {
                     "200": {

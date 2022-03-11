@@ -1,6 +1,6 @@
 const adService = (repository: any) => ({
-  async getAll(ads: any) {
-    return await repository.getAll(ads);
+  async getAll(limit: number, offset: number) {
+    return await repository.getAll(limit, offset);
   },
 });
 export default adService;
