@@ -11,6 +11,20 @@ const adController = (service: any) => ({
         res.status(500).send(err);
       });
   },
+  getOne(req: Request, res: Response) {
+    return service
+      .getOne(req.params.id)
+      .then((ad: any) => {
+        if (ad) {
+          res.status(200).send(ad);
+        } else {
+          res.status(404).json({ message: "Id not found" });
+        }
+      })
+      .catch((err: any) => {
+        res.status(500).send(err);
+      });
+  },
 });
 
 export default adController;

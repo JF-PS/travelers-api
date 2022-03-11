@@ -3,6 +3,8 @@ const adRoute = (express: any, controller: any) => {
 
   router.get("/", controller.getAll);
 
+  router.get("/:id", controller.getOne);
+
   return router;
 };
 

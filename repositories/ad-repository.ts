@@ -51,6 +51,21 @@ class AdRepository {
         });
     });
   }
+
+  getOne(id: number): Promise<IAd> {
+    return new Promise((resolve, reject) => {
+      Ads.findByPk(id, {
+        attributes: attributesAd,
+      })
+        .then((ad: IAd) => {
+          resolve(ad);
+        })
+        .catch((err: any) => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  }
 }
 
 export default AdRepository;
