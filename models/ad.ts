@@ -5,7 +5,10 @@ import IAd from "../interfaces/i-ad";
 module.exports = (sequelize: any, DataTypes: any) => {
   class Ad extends Model<IAd> implements IAd {
     id!: number;
+    title!: string;
+    description!: string;
     vehicle_id!: number;
+    picture_id!: number;
     user_id!: number;
     type_id!: number;
     address!: string;
@@ -27,9 +30,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
         as: "type",
       });
 
-      Ad.hasMany(models.AdPictures, {
+      Ad.hasOne(models.AdPicture, {
+        as: "adPicture",
         foreignKey: "ad_id",
+      });
+
+      Ad.hasMany(models.AdPicture, {
         as: "AdPictures",
+        foreignKey: "ad_id",
       });
     }
   }
@@ -42,7 +50,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      title: DataTypes.STRING,
+      description: DataTypes.TEXT,
       vehicle_id: DataTypes.INTEGER,
+      picture_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       user_id: DataTypes.INTEGER,
       type_id: DataTypes.INTEGER,
       address: DataTypes.STRING,

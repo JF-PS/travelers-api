@@ -1,6 +1,6 @@
 const adService = (repository: any) => ({
-  async getAll(limit: number, offset: number) {
-    return await repository.getAll(limit, offset);
+  async getAll(query: any) {
+    return await repository.getAll(query);
   },
   async getOne(ads: any) {
     return await repository.getOne(ads);

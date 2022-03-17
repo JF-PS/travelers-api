@@ -1,21 +1,21 @@
 "use strict";
 import { Model } from "sequelize";
-import IAdPictures from "../interfaces/i-ad-pictures";
+import IAdPicture from "../interfaces/i-ad-pictures";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class AdPictures extends Model<IAdPictures> implements IAdPictures {
+  class AdPicture extends Model<IAdPicture> implements IAdPicture {
     id!: number;
     ad_id!: number;
     source!: string;
 
     static associate(models: any) {
-      AdPictures.belongsTo(models.Ad, {
+      AdPicture.belongsTo(models.Ad, {
+        as: "picture",
         foreignKey: "ad_id",
-        as: "ad",
       });
     }
   }
-  AdPictures.init(
+  AdPicture.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -28,8 +28,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      modelName: "AdPictures",
+      modelName: "AdPicture",
     }
   );
-  return AdPictures;
+  return AdPicture;
 };

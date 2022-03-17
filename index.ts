@@ -3,6 +3,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import path from "path";
+import cors from "cors";
 
 import swaggerUi from "swagger-ui-express";
 import * as swaggerDocument from "./swagger.json";
@@ -26,6 +27,8 @@ import adRoutes from "./routes/ad-routes";
 const adRepository = new AdRepository();
 
 const app = express();
+
+app.use(cors());
 
 app.use(logger("dev"));
 app.use(express.json());
