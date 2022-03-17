@@ -5,6 +5,8 @@ const adRoute = (express: any, controller: any) => {
 
   router.get("/:id", controller.getOne);
 
+  router.post("/", controller.create);
+
   return router;
 };
 

@@ -21,6 +21,23 @@ const attributesVehicles: Array<string> = [
 const attributesGas: Array<string> = ["id", "name"];
 
 class VehicleRepository {
+  create(vehicle: any): Promise<IVehicle> {
+    console.log("----------- Vehicle repo --------------");
+    console.log(vehicle);
+    console.log("-------------------------");
+
+    return new Promise((resolve, reject) => {
+      Vehicles.create(vehicle)
+        .then((newVehicle: IVehicle) => {
+          resolve(newVehicle);
+        })
+        .catch((err: any) => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  }
+
   getAll(): Promise<IVehicle> {
     return new Promise((resolve, reject) => {
       Vehicles.findAll({

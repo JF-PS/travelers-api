@@ -19,6 +19,22 @@ const attributesVehicle: Array<string> = [
 ];
 
 class AdRepository {
+  create(ad: any): Promise<IAd> {
+    console.log("----------- Ad repo --------------");
+    console.log(ad);
+    console.log("-------------------------");
+    return new Promise((resolve, reject) => {
+      Ads.create(ad)
+        .then((newAd: IAd) => {
+          resolve(newAd);
+        })
+        .catch((err: any) => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  }
+
   getAll(limit: number, offset: number): Promise<IAd> {
     return new Promise((resolve, reject) => {
       Ads.findAndCountAll({
