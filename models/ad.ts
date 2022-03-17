@@ -13,8 +13,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     type_id!: number;
     address!: string;
     price!: number;
-    title!: string;
-    description!: string;
 
     static associate(models: any) {
       Ad.belongsTo(models.User, {
@@ -63,8 +61,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
       type_id: DataTypes.INTEGER,
       address: DataTypes.STRING,
       price: DataTypes.FLOAT,
-      title: DataTypes.STRING,
-      description: DataTypes.TEXT,
     },
     {
       sequelize,
