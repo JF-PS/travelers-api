@@ -70,7 +70,7 @@ class AdRepository {
     });
   }
 
-  deleteOne(id: number): Promise<IAd> {
+  deleteOne(id: number): Promise<any> {
     return new Promise((resolve, reject) => {
       Ads.findByPk(id)
         .then((ad: any) => {
@@ -78,12 +78,12 @@ class AdRepository {
             .then((vehicle: any) => {
               ad.destroy();
               vehicle.destroy();
+              resolve({});
             })
             .catch((err: any) => {
               console.log(err);
               reject(err);
             });
-          resolve(ad);
         })
         .catch((err: any) => {
           console.log(err);

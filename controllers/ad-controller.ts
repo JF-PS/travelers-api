@@ -30,7 +30,7 @@ const adController = (service: any) => ({
     return service
       .deleteOne(req.params.id)
       .then((ad: any) => {
-        res.status(201).send(ad);
+        res.status(204).send(ad);
       })
       .catch((err: any) => {
         res.status(500).send(err);
