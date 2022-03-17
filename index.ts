@@ -48,7 +48,10 @@ app.use(
   vehicleRoutes(express, vehicleController(vehicleService(vehicleRepository)))
 );
 
-app.use("/ads", adRoutes(express, adController(adService(adRepository))));
+app.use(
+  "/ads",
+  adRoutes(express, adController(adService(vehicleRepository, adRepository)))
+);
 
 const port = process.env.PORT || 3000;
 

@@ -39,6 +39,20 @@ const attributesVehicle: Array<string> = [
 ];
 
 class AdRepository {
+  create(id: number, ad: any): Promise<IAd> {
+    ad.vehicle_id = id;
+    return new Promise((resolve, reject) => {
+      Ads.create(ad)
+        .then((newAd: IAd) => {
+          resolve(newAd);
+        })
+        .catch((err: any) => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  }
+
   getAll(query: any): Promise<IAd> {
     const { limit = 25, offset = 0, title = "" } = query;
     return new Promise((resolve, reject) => {

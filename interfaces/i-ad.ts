@@ -8,5 +8,7 @@ interface IAd {
   type_id: number;
   address: string;
   price: number;
+  title: string;
+  description: string;
 }
 export default IAd;
