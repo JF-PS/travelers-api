@@ -19,10 +19,8 @@ const attributesVehicle: Array<string> = [
 ];
 
 class AdRepository {
-  create(ad: any): Promise<IAd> {
-    console.log("----------- Ad repo --------------");
-    console.log(ad);
-    console.log("-------------------------");
+  create(id: number, ad: any): Promise<IAd> {
+    ad.vehicle_id = id;
     return new Promise((resolve, reject) => {
       Ads.create(ad)
         .then((newAd: IAd) => {

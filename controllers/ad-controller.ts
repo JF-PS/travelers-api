@@ -1,20 +1,10 @@
 import { Request, Response } from "express";
 
 const adController = (service: any) => ({
-  getAll(req: Request, res: Response) {
-    const { limit, offset } = req.params;
+  create(req: Request, res: Response) {
+    const { vehicle, ad } = req.body;
     return service
-      .getAll(limit, offset)
-      .then((ad: any) => {
-        res.status(200).send(ad);
-      })
-      .catch((err: any) => {
-        res.status(500).send(err);
-      });
-  },
-  getOne(req: Request, res: Response) {
-    return service
-      .getOne(req.params.id)
+      .create(vehicle, ad)
       .then((ad: any) => {
         if (ad) {
           res.status(200).send(ad);
@@ -27,10 +17,21 @@ const adController = (service: any) => ({
       });
   },
 
-  create(req: Request, res: Response) {
-    const { vehicle, ad } = req.body;
+  getAll(req: Request, res: Response) {
+    const { limit, offset } = req.params;
     return service
-      .create(vehicle, ad)
+      .getAll(limit, offset)
+      .then((ad: any) => {
+        res.status(200).send(ad);
+      })
+      .catch((err: any) => {
+        res.status(500).send(err);
+      });
+  },
+
+  getOne(req: Request, res: Response) {
+    return service
+      .getOne(req.params.id)
       .then((ad: any) => {
         if (ad) {
           res.status(200).send(ad);

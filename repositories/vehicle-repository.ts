@@ -22,10 +22,6 @@ const attributesGas: Array<string> = ["id", "name"];
 
 class VehicleRepository {
   create(vehicle: any): Promise<IVehicle> {
-    console.log("----------- Vehicle repo --------------");
-    console.log(vehicle);
-    console.log("-------------------------");
-
     return new Promise((resolve, reject) => {
       Vehicles.create(vehicle)
         .then((newVehicle: IVehicle) => {
