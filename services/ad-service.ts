@@ -18,7 +18,7 @@ const adService = (repositoryVehicle: any, repositoryAd: any) => ({
     return await repositoryAd.getOne(ads);
   },
   async deleteOne(ads: any) {
-    return await repository.deleteOne(ads);
+    return await repositoryAd.deleteOne(ads);
   },
 });
 export default adService;
