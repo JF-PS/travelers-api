@@ -151,6 +151,28 @@ class AdRepository {
         });
     });
   }
+
+  deleteOne(id: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      Ads.findByPk(id)
+        .then((ad: any) => {
+          Vehicles.findByPk(ad.vehicle_id)
+            .then((vehicle: any) => {
+              ad.destroy();
+              vehicle.destroy();
+              resolve({});
+            })
+            .catch((err: any) => {
+              console.log(err);
+              reject(err);
+            });
+        })
+        .catch((err: any) => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  }
 }
 
 export default AdRepository;

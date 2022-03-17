@@ -42,6 +42,16 @@ const adController = (service: any) => ({
         res.status(500).send(err);
       });
   },
+  deleteOne(req: Request, res: Response) {
+    return service
+      .deleteOne(req.params.id)
+      .then((ad: any) => {
+        res.status(204).send(ad);
+      })
+      .catch((err: any) => {
+        res.status(500).send(err);
+      });
+  },
 });
 
 export default adController;

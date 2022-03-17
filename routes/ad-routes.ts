@@ -7,6 +7,8 @@ const adRoute = (express: any, controller: any) => {
 
   router.get("/:id", controller.getOne);
 
+  router.delete("/:id", controller.deleteOne);
+
   return router;
 };
 
