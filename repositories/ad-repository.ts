@@ -10,6 +10,7 @@ import Brand from "../models";
 import Category from "../models";
 import SubCategory from "../models";
 import AdPicture from "../models";
+import { adOrder } from "../utils/order";
 
 const Ads = Ad.Ad;
 const AdsTypes = AdType.AdType;
@@ -54,7 +55,12 @@ class AdRepository {
   }
 
   getAll(query: any): Promise<IAd> {
-    const { limit = 25, offset = 0, title = "" } = query;
+    const {
+      limit = 25,
+      offset = 0,
+      title = "",
+      orderBy = "createDesc",
+    } = query;
     return new Promise((resolve, reject) => {
       Ads.findAndCountAll({
         attributes: attributesAd,
@@ -63,6 +69,7 @@ class AdRepository {
         where: {
           title: { [Op.substring]: title },
         },
+        order: adOrder(orderBy),
         include: [
           {
             model: AdsTypes,
