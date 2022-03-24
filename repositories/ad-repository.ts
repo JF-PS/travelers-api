@@ -60,15 +60,28 @@ class AdRepository {
       offset = 0,
       title = "",
       orderBy = "createDesc",
+      min = 0,
+      max = null,
+      type = null,
+      gas = null,
     } = query;
+
+    const where: any = {
+      title: { [Op.substring]: title },
+      price: { [Op.gte]: min },
+    };
+    if (max !== null) where.price = { ...where.price, [Op.lte]: max };
+    if (type !== null) where.type_id = type;
+
+    const whereGas: any = {};
+    if (gas !== null) whereGas.gas_id = gas;
+
     return new Promise((resolve, reject) => {
       Ads.findAndCountAll({
         attributes: attributesAd,
         limit,
         offset,
-        where: {
-          title: { [Op.substring]: title },
-        },
+        where,
         order: adOrder(orderBy),
         include: [
           {
@@ -80,6 +93,7 @@ class AdRepository {
             model: Vehicles,
             as: "vehicle",
             attributes: attributesVehicle,
+            where: whereGas,
             include: [
               {
                 model: Horsepowers,
