@@ -28,7 +28,7 @@ const userController = (service: any) => ({
     return service
       .validate(token)
       .then((authUser: any) => {
-        res.status(201).send(authUser);
+        -res.status(201).send(authUser);
       })
       .catch((err: any) => {
         res.status(500).send(err);

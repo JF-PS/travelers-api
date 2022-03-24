@@ -50,7 +50,7 @@ const userService = (repository: any, mailing: any) => ({
     const text = `Thanks for creating an account, please confirm your email !
     Click go to : /validate/${verifyToken}`;
 
-    const isMailSend = mailing.sendEmail(
+    const isMailSend = await mailing.sendEmail(
       mailing.writeEmail({ to: email, text })
     );
     if (!isMailSend)
@@ -74,34 +74,32 @@ const userService = (repository: any, mailing: any) => ({
   },
 
   async forgotPassword(email: string) {
-    //je veux récupérer le compte du user via l'email
     const oldUser: IUser = await repository.getByEmail(email);
 
     if (!oldUser) return { errorMessage: "User doesn't exist" };
 
     const verifyToken = encrypt(email);
 
-    //j'envoie le mail pour changer de mdp
     const text = `Your forgot your password!
     Click on this link to reset it : /newPassword/${verifyToken}`;
 
-    mailing.sendEmail(mailing.writeEmail({ to: email, text }));
+    const isEmailSend = await mailing.sendEmail(
+      mailing.writeEmail({ to: email, text })
+    );
+
+    if (!isEmailSend)
+      return { errorMessage: "A problem was encountered with sending email" };
 
     return { message: "Email sent" };
   },
 
   async newPassword(tokenEmail: string, password: string) {
-    //décrypter le token email
     const decryptToken = decrypt(tokenEmail);
 
-    //modification du mdp à l'utilisateur correspondant à l'email décrypté (cf 3 actions ci-dessous):
-
-    //vérifier si un utilisateur avec cet email existe
     const isAccountExist: IUser = await repository.checkAccount(decryptToken);
-    //s'il n'existe pas envoi d'un message d'erreur token Invalide
+
     if (!isAccountExist) return { errorMessage: "Your account doesn't exist!" };
 
-    //si oui, on continue, appel de la fonction de modifcation password(email, password) - ( dans le repo)
     const confirmNewPassword: IUser = await repository.createNewPassword(
       decryptToken,
       password
