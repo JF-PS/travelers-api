@@ -2,8 +2,8 @@ import sgMail from "@sendgrid/mail";
 import IMsg from "../interfaces/i-msg";
 import verifTemplate from "../template/verif-template";
 
-const defaultTo = "momoteamynov@gmail.com";
-const defaultFrom = "momoteamynov@gmail.com";
+const defaultTo = "momoexcalibur.ynov@gmail.com";
+const defaultFrom = "momoexcalibur.ynov@gmail.com";
 const defaultSubject = "Confirmation de création de compte :)";
 const defaultText = "Bonjour, ceci est un message de test par défaut.";
 const defaultHtml = verifTemplate(defaultText, defaultTo);

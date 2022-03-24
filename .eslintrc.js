@@ -12,6 +12,7 @@ module.exports = {
     "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/no-explicit-any": ["off"],
     "@typescript-eslint/strict-boolean-expressions": 0,
+    "@typescript-eslin/one-var": 0,
   },
   ignorePatterns: ["src/**/*.test.ts", "src/frontend/generated/*"],
 };

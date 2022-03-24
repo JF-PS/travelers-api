@@ -7,18 +7,13 @@ import cors from "cors";
 
 import swaggerUi from "swagger-ui-express";
 import * as swaggerDocument from "./swagger.json";
-
 import EmailManagment from "./utils/sendgrid";
+import VehicleRepository from "./repositories/vehicle-repository";
 
 import UserRepository from "./repositories/user-repository";
 import userService from "./services/user-service";
 import userController from "./controllers/user-controller";
 import userRoutes from "./routes/user-routes";
-
-import VehicleRepository from "./repositories/vehicle-repository";
-import vehicleService from "./services/vehicle-service";
-import vehicleController from "./controllers/vehicle-controller";
-import vehicleRoutes from "./routes/vehicle-routes";
 
 import AdRepository from "./repositories/ad-repository";
 import adService from "./services/ad-service";
@@ -42,14 +37,6 @@ app.use(
   userRoutes(
     express,
     userController(userService(new UserRepository(), new EmailManagment()))
-  )
-);
-
-app.use(
-  "/vehicles",
-  vehicleRoutes(
-    express,
-    vehicleController(vehicleService(new VehicleRepository()))
   )
 );
 
