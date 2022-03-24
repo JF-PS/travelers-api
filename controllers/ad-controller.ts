@@ -52,6 +52,17 @@ const adController = (service: any) => ({
         res.status(500).send(err);
       });
   },
+
+  async updateOne(req: Request, res: Response) {
+    return service
+      .updateOne(req.params.id, req.body)
+      .then((ad: any) => {
+        res.status(201).send(ad);
+      })
+      .catch((err: any) => {
+        res.status(500).send(err);
+      });
+  },
 });
 
 export default adController;

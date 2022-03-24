@@ -173,6 +173,19 @@ class AdRepository {
         });
     });
   }
+
+  updateOne(id: number, ad: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      Ads.findByPk(id)
+        .then((updateAd: any) => {
+          resolve(updateAd.update(ad));
+        })
+        .catch((err: any) => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  }
 }
 
 export default AdRepository;
