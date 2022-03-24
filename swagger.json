@@ -6,15 +6,11 @@
         "title": "Travellers API"
     },
     "host": "localhost:3000",
-    "basePath": "",
+    "basePath": "/",
     "tags": [
         {
             "name": "user",
             "description": "Operations about users"
-        },
-        {
-            "name": "vehicle",
-            "description": "Operations about vehicles"
         },
         {
             "name": "ad",
@@ -217,14 +213,14 @@
             }
         },
 
-        "/vehicles": {
-            "get": {
+        "/ads/": {
+            "post": {
                 "tags": [
-                    "vehicle"
+                    "ad"
                 ],
-                "summary": "Get all the vehicles",
+                "summary": "Create an ad",
                 "description": "",
-                "operationId": "getAllVehicles",
+                "operationId": "createAd",
                 "consumes": [
                     "application/json",
                     "application/xml"
@@ -232,6 +228,17 @@
                 "produces": [
                     "application/xml",
                     "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "new Ad",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ad"
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -244,12 +251,12 @@
             }
         },
 
-        "/ads/{limit}/{offset}": {
+        "/ads": {
             "get": {
                 "tags": [
                     "ad"
                 ],
-                "summary": "Get all the ads",
+                "summary": "Get ads with parameters",
                 "description": "",
                 "operationId": "getAllAds",
                 "consumes": [
@@ -263,17 +270,45 @@
                 "parameters": [
                     {
                         "name": "limit",
-                        "in": "path",
+                        "in": "query",   
                         "description": "limit the numbers of ads",
-                        "required": true,
+                        "required": false,
                         "type": "integer"
                     },
                     {
                         "name": "offset",
-                        "in": "path",
-                        "description": "allow to skip some ads to display",
-                        "required": true,
+                        "in": "query",   
+                        "description": "Allow to skip some ads to display",
+                        "required": false,
                         "type": "integer"
+                    },
+                    {
+                        "name": "min",
+                        "in": "query",   
+                        "description": "Min means maximum price",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "max",
+                        "in": "query",   
+                        "description": "Max means maximum price",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",   
+                        "description": "Order by alphabetic title or by time order",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",   
+                        "description": "Search letter or word",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -302,7 +337,7 @@
                     "application/xml",
                     "application/json"
                 ],
-                 "parameters": [
+                "parameters": [
                     {
                         "name": "id",
                         "in": "path",
@@ -313,6 +348,87 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+
+        "/ads/{delete_id}": {
+            "delete": {
+                "tags": [
+                    "ad"
+                ],
+                "summary": "Delete an ad",
+                "description": "",
+                "operationId": "deleteAd",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "delete_id",
+                        "in": "path",
+                        "description": "id used to delete an unique ad",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+
+        "/ads/{update_id}": {
+            "put": {
+                "tags": [
+                    "ad"
+                ],
+                "summary": "Update an ad",
+                "description": "",
+                "operationId": "updateAd",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "update_id",
+                        "in": "path",
+                        "description": "id used to update an unique ad",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "element to update",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updatead"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
                         "description": "Successful operation"
                     },
                     "400": {
@@ -374,6 +490,77 @@
             },
             "xml": {
                 "name": "password"
+            }
+        },
+        "ad": {
+            "type": "object",
+            "properties": {
+                "vehicle": {
+                    "type": "object",
+                    "properties": {
+                        "category_id": {
+                            "type": "integer"
+                        },
+                        "sub_category_id": {
+                            "type": "integer"
+                        },
+                        "brand_id": {
+                            "type": "integer"
+                        },
+                        "serial_number_id": {
+                            "type": "integer"
+                        },
+                        "gas_id": {
+                            "type": "integer"
+                        },
+                        "horsepower_id": {
+                            "type": "integer"
+                        },
+                        "year": {
+                            "type": "string"
+                        },
+                        "date_circulation": {
+                            "type": "string"
+                        },
+                        "kilometers": {
+                            "type": "integer"
+                        }
+                    }
+                }, 
+                "ad": {
+                    "type": "object",
+                    "properties": {
+                        "user_id": {
+                            "type": "integer"
+                        },
+                        "type_id": {
+                            "type": "integer"
+                        },
+                        "address": {
+                            "type": "string"
+                        },
+                        "price": {
+                            "type": "number"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "xml": {
+                "name": "createad"
+            }
+        },
+        "updatead": {
+            "type": "object",
+            "properties": {
+                "title":{
+                    "type": "string"
+                }
             }
         }
     }
