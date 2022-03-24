@@ -50,7 +50,11 @@ const userService = (repository: any, mailing: any) => ({
     const text = `Thanks for creating an account, please confirm your email !
     Click go to : /validate/${verifyToken}`;
 
-    mailing.sendEmail(mailing.writeEmail({ to: email, text }));
+    const isMailSend = mailing.sendEmail(
+      mailing.writeEmail({ to: email, text })
+    );
+    if (!isMailSend)
+      return { errorMessage: "A problem was encountered with sending email" };
 
     return { result: newUser };
   },

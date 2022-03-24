@@ -43,6 +43,48 @@ describe("UserService ==> SignUp Tests : ", () => {
 
   /**
    *  Test 2 :
+   *  title: "Email not found"
+   *  info: « If the email is not found,
+   *  sending it to email is impossible »
+   */
+  test("Email not found", async () => {
+    const name: string = "name";
+    const email: string = "not.found@error.com";
+    const password: string = "password";
+
+    // Arrange
+    const params = {
+      name,
+      email,
+      password,
+    };
+
+    const expected = {
+      errorMessage: "A problem was encountered with sending email",
+    };
+
+    const getByEmail = (mockUserRepository.getByEmail = jest.fn());
+    getByEmail.mockReturnValue(false);
+
+    const createUser = (mockUserRepository.createUser = jest.fn());
+    createUser.mockReturnValue(expected);
+
+    const writeEmail = (mockEmailManagment.writeEmail = jest.fn());
+    writeEmail.mockReturnValue(true);
+
+    const sendEmail = (mockEmailManagment.sendEmail = jest.fn());
+    sendEmail.mockReturnValue(false);
+
+    // Act
+    const response: any = await service.signUp(params);
+
+    // Assert
+    expect.objectContaining(response);
+    expect(response).toEqual(expected);
+  });
+
+  /**
+   *  Test 3 :
    *  title: "Successful account creation"
    *  info: « If the user does not exist,
    *  the account is registered »
