@@ -1,10 +1,9 @@
 import { compare, hash } from "bcrypt";
 import { encrypt, decrypt } from "../utils/crypto";
-import { writeEmail, sendEmail } from "../utils/sendgrid";
 import { createToken } from "../utils/jwt";
 import IUser from "../interfaces/i-user";
 
-const userService = (repository: any) => ({
+const userService = (repository: any, mailing: any) => ({
   async signIn(user: any) {
     const { email, password } = user;
 
@@ -51,7 +50,7 @@ const userService = (repository: any) => ({
     const text = `Thanks for creating an account, please confirm your email !
     Click go to : /validate/${verifyToken}`;
 
-    sendEmail(writeEmail({ to: email, text }));
+    mailing.sendEmail(mailing.writeEmail({ to: email, text }));
 
     return { result: newUser };
   },
@@ -82,7 +81,7 @@ const userService = (repository: any) => ({
     const text = `Your forgot your password!
     Click on this link to reset it : /newPassword/${verifyToken}`;
 
-    sendEmail(writeEmail({ to: email, text }));
+    mailing.sendEmail(mailing.writeEmail({ to: email, text }));
 
     return { message: "Email sent" };
   },

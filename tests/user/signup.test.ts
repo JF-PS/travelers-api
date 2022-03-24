@@ -1,10 +1,9 @@
 import mockUserRepository from "../mock/user.mock";
-import { mockRequest, mockResponse } from "jest-mock-req-res";
-import { Request, Response } from "express";
+import mockEmailManagment from "../mock/email.mock";
 import { hash } from "bcrypt";
 
 import userService from "../../services/user-service";
-const service = userService(mockUserRepository);
+const service = userService(mockUserRepository, mockEmailManagment);
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -73,6 +72,12 @@ describe("UserService ==> SignUp Tests : ", () => {
 
     const createUser = (mockUserRepository.createUser = jest.fn());
     createUser.mockReturnValue(expected);
+
+    const writeEmail = (mockEmailManagment.writeEmail = jest.fn());
+    writeEmail.mockReturnValue(true);
+
+    const sendEmail = (mockEmailManagment.sendEmail = jest.fn());
+    sendEmail.mockReturnValue(true);
 
     // Act
     const response: any = await service.signUp(params);

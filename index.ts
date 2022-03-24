@@ -8,23 +8,22 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import * as swaggerDocument from "./swagger.json";
 
+import EmailManagment from "./utils/sendgrid";
+
 import UserRepository from "./repositories/user-repository";
 import userService from "./services/user-service";
 import userController from "./controllers/user-controller";
 import userRoutes from "./routes/user-routes";
-const userRepository = new UserRepository();
 
 import VehicleRepository from "./repositories/vehicle-repository";
 import vehicleService from "./services/vehicle-service";
 import vehicleController from "./controllers/vehicle-controller";
 import vehicleRoutes from "./routes/vehicle-routes";
-const vehicleRepository = new VehicleRepository();
 
 import AdRepository from "./repositories/ad-repository";
 import adService from "./services/ad-service";
 import adController from "./controllers/ad-controller";
 import adRoutes from "./routes/ad-routes";
-const adRepository = new AdRepository();
 
 const app = express();
 
@@ -40,17 +39,26 @@ app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(
   "/users",
-  userRoutes(express, userController(userService(userRepository)))
+  userRoutes(
+    express,
+    userController(userService(new UserRepository(), new EmailManagment()))
+  )
 );
 
 app.use(
   "/vehicles",
-  vehicleRoutes(express, vehicleController(vehicleService(vehicleRepository)))
+  vehicleRoutes(
+    express,
+    vehicleController(vehicleService(new VehicleRepository()))
+  )
 );
 
 app.use(
   "/ads",
-  adRoutes(express, adController(adService(vehicleRepository, adRepository)))
+  adRoutes(
+    express,
+    adController(adService(new VehicleRepository(), new AdRepository()))
+  )
 );
 
 const port = process.env.PORT || 3000;
