@@ -100,9 +100,11 @@ const userService = (repository: any, mailing: any) => ({
 
     if (!isAccountExist) return { errorMessage: "Your account doesn't exist!" };
 
+    const hashedPassword: string = await hash(password, 12);
+
     const confirmNewPassword: IUser = await repository.createNewPassword(
       decryptToken,
-      password
+      hashedPassword
     );
 
     return { result: confirmNewPassword };
