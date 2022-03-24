@@ -19,7 +19,7 @@ const userService = (repository: any) => ({
       currentUser.password
     );
 
-    if (!isPasswordCorrect) return { errorMessage: "Invalid credentials" };
+    if (!isPasswordCorrect) return { errorMessage: "Incorrect password" };
 
     const token: string = createToken({
       email: currentUser.email,
@@ -53,9 +53,7 @@ const userService = (repository: any) => ({
 
     sendEmail(writeEmail({ to: email, text }));
 
-    const token: string = createToken({ email, id });
-
-    return { result: newUser, token };
+    return { result: newUser };
   },
 
   async validate(verifyToken: string) {
