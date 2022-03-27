@@ -4,22 +4,30 @@ const userController = (service: any) => ({
   signIn(req: Request, res: Response) {
     return service
       .signIn(req.body)
-      .then((authUser: void) => {
-        res.status(201).send(authUser);
+      .then((response: any) => {
+        if (response.errorMessage != null) {
+          res.status(412).json({ message: response.errorMessage });
+        } else {
+          res.status(200).json({ user: response.result });
+        }
       })
       .catch((err: any) => {
-        res.status(500).send(err);
+        res.status(500).json(err);
       });
   },
 
   signUp(req: Request, res: Response) {
     return service
       .signUp(req.body)
-      .then((authUser: any) => {
-        res.status(201).send(authUser);
+      .then((response: any) => {
+        if (response.errorMessage != null) {
+          res.status(412).json({ message: response.errorMessage });
+        } else {
+          res.status(201).json({ user: response.result });
+        }
       })
       .catch((err: any) => {
-        res.status(500).send(err);
+        res.status(500).json(err);
       });
   },
 
@@ -27,11 +35,15 @@ const userController = (service: any) => ({
     const { token } = req.params;
     return service
       .validate(token)
-      .then((authUser: any) => {
-        -res.status(201).send(authUser);
+      .then((response: any) => {
+        if (response.errorMessage != null) {
+          res.status(412).json({ message: response.errorMessage });
+        } else {
+          res.status(200).json({ user: response.result });
+        }
       })
       .catch((err: any) => {
-        res.status(500).send(err);
+        res.status(500).json(err);
       });
   },
 
@@ -39,11 +51,15 @@ const userController = (service: any) => ({
     const { email } = req.body;
     return service
       .forgotPassword(email)
-      .then((authUser: void) => {
-        res.status(201).send(authUser);
+      .then((response: any) => {
+        if (response.errorMessage != null) {
+          res.status(412).json({ message: response.errorMessage });
+        } else {
+          res.status(200).json(response);
+        }
       })
       .catch((err: any) => {
-        res.status(500).send(err);
+        res.status(500).json(err);
       });
   },
 
@@ -52,11 +68,15 @@ const userController = (service: any) => ({
     const { token } = req.params;
     return service
       .newPassword(token, password)
-      .then((authUser: any) => {
-        res.status(201).send(authUser);
+      .then((response: any) => {
+        if (response.errorMessage != null) {
+          res.status(412).json({ message: response.errorMessage });
+        } else {
+          res.status(200).json({ user: response.result });
+        }
       })
       .catch((err: any) => {
-        res.status(500).send(err);
+        res.status(500).json(err);
       });
   },
 });

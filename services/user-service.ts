@@ -32,7 +32,6 @@ const userService = (repository: any, mailing: any) => ({
     const { name, email, password } = user;
 
     const oldUser: IUser = await repository.getByEmail(email);
-
     if (oldUser) return { errorMessage: "User already exists" };
 
     const hashedPassword: string = await hash(password, 12);
@@ -75,7 +74,6 @@ const userService = (repository: any, mailing: any) => ({
 
   async forgotPassword(email: string) {
     const oldUser: IUser = await repository.getByEmail(email);
-
     if (!oldUser) return { errorMessage: "User doesn't exist" };
 
     const verifyToken = encrypt(email);

@@ -44,7 +44,13 @@ app.use(
   "/ads",
   adRoutes(
     express,
-    adController(adService(new VehicleRepository(), new AdRepository()))
+    adController(
+      adService(
+        new VehicleRepository(),
+        new AdRepository(),
+        new UserRepository()
+      )
+    )
   )
 );
 

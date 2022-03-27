@@ -5,62 +5,80 @@ const adController = (service: any) => ({
     const { vehicle, ad } = req.body;
     return service
       .create(vehicle, ad)
-      .then((ad: any) => {
-        if (ad) {
-          res.status(200).send(ad);
+      .then((response: any) => {
+        if (response.errorMessage != null) {
+          res.status(412).json(response.errorMessage);
         } else {
-          res.status(404).json({ message: "Id not found" });
+          res.status(201).json({ ad: response.result });
         }
       })
       .catch((err: any) => {
-        res.status(500).send(err);
+        res.status(500).json(err);
       });
   },
 
   getAll(req: Request, res: Response) {
     return service
       .getAll(req.query)
-      .then((ad: any) => {
-        res.status(200).send(ad);
+      .then((response: any) => {
+        if (response.errorMessage != null) {
+          res.status(412).json({ message: response.errorMessage });
+        } else {
+          res.status(201).json({ ads: response.result });
+        }
       })
       .catch((err: any) => {
-        res.status(500).send(err);
+        res.status(500).json(err);
       });
   },
 
   getOne(req: Request, res: Response) {
+    const { id } = req.params;
     return service
-      .getOne(req.params.id)
-      .then((ad: any) => {
-        if (ad) {
-          res.status(200).send(ad);
+      .getOne(id)
+      .then((response: any) => {
+        if (response.errorMessage != null) {
+          res.status(412).json({ message: response.errorMessage });
         } else {
-          res.status(404).json({ message: "Id not found" });
+          res.status(201).json({ ad: response.result });
         }
       })
       .catch((err: any) => {
-        res.status(500).send(err);
+        res.status(500).json(err);
       });
   },
+
   deleteOne(req: Request, res: Response) {
+    const { id } = req.params;
+    const { user_id } = req.body;
     return service
-      .deleteOne(req.params.id)
-      .then((ad: any) => {
-        res.status(204).send(ad);
+      .deleteOne(id, user_id)
+      .then((response: any) => {
+        if (response.errorMessage != null) {
+          res.status(412).json({ message: response.errorMessage });
+        } else {
+          res.status(204).json({ ad: response.result });
+        }
       })
       .catch((err: any) => {
-        res.status(500).send(err);
+        res.status(500).json(err);
       });
   },
 
   async updateOne(req: Request, res: Response) {
+    const { id } = req.params;
+    const { ad, user_id } = req.body;
     return service
-      .updateOne(req.params.id, req.body)
-      .then((ad: any) => {
-        res.status(201).send(ad);
+      .updateOne(id, ad, user_id)
+      .then((response: any) => {
+        if (response.errorMessage != null) {
+          res.status(412).json({ message: response.errorMessage });
+        } else {
+          res.status(200).json({ ad: response.result });
+        }
       })
       .catch((err: any) => {
-        res.status(500).send(err);
+        res.status(500).json(err);
       });
   },
 });

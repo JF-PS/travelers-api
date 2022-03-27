@@ -28,6 +28,22 @@ class UserRepository {
     });
   }
 
+  getById(id: number): Promise<IUser> {
+    return new Promise((resolve, reject) => {
+      Users.findOne({
+        attributes,
+        where: { id },
+      })
+        .then((user: IUser) => {
+          resolve(user);
+        })
+        .catch((err: any) => {
+          console.error(err);
+          reject(err);
+        });
+    });
+  }
+
   checkAccount(email: string, id: number = 0): Promise<IUser> {
     const whereParams = id === 0 ? { email } : { id, email };
     return new Promise((resolve, reject) => {
