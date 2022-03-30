@@ -3,7 +3,12 @@ class UserRepository {
   constructor() {
     this.name = "test";
   }
+
   public getByEmail(email: string): any {
+    throw new Error("Method not implemented.");
+  }
+
+  public getById(id: number): any {
     throw new Error("Method not implemented.");
   }
 

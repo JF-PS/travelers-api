@@ -7,7 +7,7 @@
     "start": "tsnd index.ts",
     "dev": "tsnd --respawn index.ts",
     "test": "jest -c ./jest.unit.json",
-    "test:coverage": "jest --coverage -c ./jest.unit.js.json",
+    "coverage": "jest --coverage -c ./jest.unit.json",
     "prepare": "husky install"
   },
   "keywords": [],

@@ -33,7 +33,7 @@ const attributesAd: Array<string> = [
 
 const baseAttribute: Array<string> = ["id", "name"];
 const pictureAttribute: Array<string> = ["id", "ad_id", "source"];
-const attributesVehicle: Array<string> = [
+const vehicleAttributes: Array<string> = [
   "id",
   "kilometers",
   "date_circulation",
@@ -92,7 +92,7 @@ class AdRepository {
           {
             model: Vehicles,
             as: "vehicle",
-            attributes: attributesVehicle,
+            attributes: vehicleAttributes,
             where: whereGas,
             include: [
               {
@@ -132,7 +132,7 @@ class AdRepository {
           {
             model: Vehicles,
             as: "vehicle",
-            attributes: attributesVehicle,
+            attributes: vehicleAttributes,
             include: [
               {
                 model: Horsepowers,

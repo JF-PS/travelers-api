@@ -51,6 +51,7 @@ const adService = (
     const userAuthorization: any = await this.checkAuthorization(userId, adId);
     if (userAuthorization) return userAuthorization;
     const result = await repositoryAd.deleteOne(adId);
+    console.log(result);
     return { result };
   },
 
