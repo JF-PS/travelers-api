@@ -24,7 +24,7 @@ const adController = (service: any) => ({
         if (response.errorMessage != null) {
           res.status(412).json({ message: response.errorMessage });
         } else {
-          res.status(201).json({ ads: response.result });
+          res.status(200).json({ ads: response.result });
         }
       })
       .catch((err: any) => {
@@ -40,7 +40,7 @@ const adController = (service: any) => ({
         if (response.errorMessage != null) {
           res.status(412).json({ message: response.errorMessage });
         } else {
-          res.status(201).json({ ad: response.result });
+          res.status(200).json({ ad: response.result });
         }
       })
       .catch((err: any) => {
