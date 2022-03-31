@@ -62,7 +62,7 @@ class AdRepository {
       orderBy = "createDesc",
       min = 0,
       max = null,
-      type = null,
+      adType = null,
       gas = null,
     } = query;
 
@@ -71,7 +71,7 @@ class AdRepository {
       price: { [Op.gte]: min },
     };
     if (max !== null) where.price = { ...where.price, [Op.lte]: max };
-    if (type !== null) where.type_id = type;
+    if (adType !== null) where.type_id = adType;
 
     const whereGas: any = {};
     if (gas !== null) whereGas.gas_id = gas;
