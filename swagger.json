@@ -297,6 +297,20 @@
                         "type": "number"
                     },
                     {
+                        "name": "gas",
+                        "in": "query",   
+                        "description": "Filter by gas id",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",   
+                        "description": "Filter by type id",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
                         "name": "orderBy",
                         "in": "query",   
                         "description": "Order by alphabetic title or by time order",
